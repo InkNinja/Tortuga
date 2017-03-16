@@ -15,7 +15,7 @@ public abstract class AbstractShip {
 	}
 	
 	public void makeSpriteName() {
-		this.spriteName =  ".\\img\\"+this.getClass().getName().toLowerCase() + "_" + this.side.name().toLowerCase()+".png";
+		this.spriteName =  ".\\img\\"+this.getClass().getSimpleName().toLowerCase() + "_" + this.side.name().toLowerCase()+".png";
 	}
 	
 	public String getSpriteName()
@@ -38,6 +38,6 @@ public abstract class AbstractShip {
 		}
 	}
 
-	public abstract boolean canMove(Direction main,Direction secondary);
+	public abstract boolean canMove(Direction main,Direction secondary) throws IllegalDirection;
 	
 }

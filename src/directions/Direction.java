@@ -11,9 +11,10 @@ public enum Direction {
 		return false;
 	}
 
-	public static boolean ifProper(Direction main, Direction secondary)
+	public static void ifProper(Direction main, Direction secondary) throws IllegalDirection
 	{
-		return main.ifMain() && !secondary.ifMain();
+		if(! (main.ifMain() && !secondary.ifMain()))
+			throw new IllegalDirection(main,secondary);
 	}
 
 	public boolean canTurn(Direction target){

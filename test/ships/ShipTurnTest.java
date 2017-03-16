@@ -27,5 +27,7 @@ public class ShipTurnTest {
 		ship.face=Direction.NORTH;
 		ship.turn(Direction.NORTH);
 	}
+	
+	
 
 }

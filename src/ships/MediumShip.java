@@ -1,6 +1,7 @@
 package ships;
 
 import directions.Direction;
+import directions.IllegalDirection;
 
 public class MediumShip extends AbstractShip{
 
@@ -10,9 +11,18 @@ public class MediumShip extends AbstractShip{
 	}
 
 	@Override
-	public boolean canMove(Direction main, Direction secondary) {
-		return Direction.ifProper(main,secondary)
-				&& (face == main || face == secondary);
+	public boolean canMove(Direction main, Direction secondary) throws IllegalDirection {
+		try{
+			Direction.ifProper(main, secondary);
+			return face == main || face == secondary;
+		}
+		catch(IllegalDirection e)
+		{
+			if(main != secondary)
+				throw e;
+			else
+				return false;
+		}
 	}
 
 }
