@@ -1,11 +1,14 @@
-package ships;
+package model.ships;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import directions.CannotTurnException;
-import directions.Direction;
+import controller.directions.CannotTurnException;
+import controller.directions.Direction;
+import model.ships.AbstractShip;
+import model.ships.Faction;
+import model.ships.SmallShip;
 
 public class ShipTurnTest {
 

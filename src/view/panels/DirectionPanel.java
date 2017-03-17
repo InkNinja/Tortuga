@@ -1,4 +1,4 @@
-package panels;
+package view.panels;
 
 
 import java.awt.Dimension;
@@ -9,8 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import directions.Direction;
-import directions.LoadSprite;
+import controller.directions.Direction;
 
 public class DirectionPanel extends JPanel{
 	
@@ -19,12 +18,10 @@ public class DirectionPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	public static final int panelSize = 20;
-	private static final int flagSize = 10;
 	
 	Direction main;
 	Direction secondary;
 	JLabel flag;
-	boolean active;
 	
 	public DirectionPanel(Direction main, Direction secondary) throws IOException
 	{
@@ -45,8 +42,6 @@ public class DirectionPanel extends JPanel{
 		c.gridy = 0;
 		c.anchor = GridBagConstraints.CENTER;
 		this.add(flag,c);		
-		active = true;
-		//canMove();
 	}
 	
 	public DirectionPanel(Direction main) throws IOException
@@ -54,19 +49,13 @@ public class DirectionPanel extends JPanel{
 		this(main,main);
 	}
 	
-	public void canMove() throws IOException
+	public void canMove(ImageIcon img) throws IOException
 	{
-		String path =  ".\\img\\green.png";
-		int size = active?panelSize:flagSize;
-		ImageIcon img = LoadSprite.getSprite(size,path);
 		flag.setIcon(img);
 	}
 	
-	public void canTurn() throws IOException
+	public void canTurn(ImageIcon img) throws IOException
 	{
-		String path =  ".\\img\\yellow.png";
-		int size = active?panelSize:flagSize;
-		ImageIcon img = LoadSprite.getSprite(size,path);
 		flag.setIcon(img);
 	}
 	

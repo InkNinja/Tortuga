@@ -1,4 +1,4 @@
-package panels;
+package view.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,30 +8,19 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import directions.Direction;
-import rules.IllegalMove;
-import ships.AbstractShip;
-import ships.BigShip;
-import ships.Faction;
+import controller.directions.Direction;
 
 public class FieldPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
-	
-	AbstractShip covered;
-	AbstractShip revealed;
 	ShipPanel shipPane;
 	LinkedList<DirectionPanel> dirs;
 	private final static double weightShip = ShipPanel.size/(ShipPanel.size+2*DirectionPanel.panelSize);
 	private final static double weightDir = DirectionPanel.panelSize/(ShipPanel.size+2*DirectionPanel.panelSize);
 	
 	
-	public FieldPanel(AbstractShip covered) throws IOException{
-		this.covered = covered;
-		this.revealed =  null;
+	public FieldPanel() throws IOException{
 		int size = ShipPanel.size+2*DirectionPanel.panelSize;
 		this.setSize(new Dimension(size,size));
 		this.setMaximumSize(new Dimension(size,size));
@@ -121,46 +110,5 @@ public class FieldPanel extends JPanel{
 		c.gridy = 1;
 		this.add(shipPane,c);	
 	}
-	
-	public void uncover() throws IllegalMove, IOException
-	{
-		if(revealed !=null || covered == null)
-			throw new IllegalMove();
-		else
-		{
-			revealed = covered;
-			covered = null;
-			shipPane.setShip(revealed);
-		}
-		//TODO
-	}
-	
-	public void moveOut() throws IOException, IllegalMove{
-		if(revealed == null)
-			throw new IllegalMove();
-		else
-		{
-			revealed = null;
-			shipPane.setShip(null);
-		}
-	}
-	
-	public void MoveIn(AbstractShip ship){
-		//TODO
-	}
-	
-	public static void main(String [] args) throws IOException
-	{
-		AbstractShip ship = new BigShip(Faction.PIRATES);
-		ship.face = Direction.EAST;
-		FieldPanel field  = new FieldPanel(ship);
-		JFrame f = new JFrame();
-		JPanel inner = new JPanel();
-		f.add(inner);
-		inner.add(field);
-		f.pack();
-		f.setVisible(true);
-	}
-
 	
 }

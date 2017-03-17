@@ -1,11 +1,11 @@
-package ships;
+package model.ships;
 
-import directions.Direction;
-import directions.IllegalDirection;
+import controller.directions.Direction;
+import controller.directions.IllegalDirection;
 
-public class BigShip extends AbstractShip{
+public class MediumShip extends AbstractShip{
 
-	public BigShip(Faction side) {
+	public MediumShip(Faction side) {
 		super(side);
 		// TODO Auto-generated constructor stub
 	}
@@ -18,15 +18,11 @@ public class BigShip extends AbstractShip{
 		}
 		catch(IllegalDirection e)
 		{
-			if (face == main && face == secondary)
-				return true;
+			if(main != secondary)
+				throw e;
 			else
-			{
-				if(main != secondary)
-					throw e;
-			}
+				return false;
 		}
-		return false;
 	}
 
 }

@@ -1,4 +1,4 @@
-package rules;
+package controller.rules;
 
 public class IllegalMove extends Exception{
 

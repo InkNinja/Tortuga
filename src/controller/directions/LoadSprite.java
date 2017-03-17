@@ -1,4 +1,4 @@
-package directions;
+package controller.directions;
 
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
@@ -10,10 +10,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import panels.ShipPanel;
-import ships.AbstractShip;
+import model.ships.AbstractShip;
 
 public class LoadSprite {
+	
+	private final static int iconSize = 80;
+	//TODO zmien to na wartoœ podan¹ przez controlera
+	//TODO przenieœ siê do modelu
 	
 	public static ImageIcon getSprite(int size,String path) throws IOException
 	{
@@ -25,7 +28,6 @@ public class LoadSprite {
 	
 	public static ImageIcon getSprite(AbstractShip ship) throws IOException
 	{
-		int iconSize = ShipPanel.size;
 		String path = ship.spriteName;		
 		BufferedImage img;
 		img = ImageIO.read(new File(path));

@@ -1,4 +1,4 @@
-package directions;
+package controller.directions;
 
 public class IllegalDirection extends Exception{
 

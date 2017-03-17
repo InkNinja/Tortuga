@@ -1,11 +1,15 @@
-package ships;
+package model.ships;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import directions.Direction;
-import directions.IllegalDirection;
+import controller.directions.Direction;
+import controller.directions.IllegalDirection;
+import model.ships.BigShip;
+import model.ships.Faction;
+import model.ships.MediumShip;
+import model.ships.SmallShip;
 
 public class ShipCanMoveTest {
 

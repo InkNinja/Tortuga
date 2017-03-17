@@ -1,4 +1,4 @@
-package directions;
+package controller.directions;
 
 public enum Direction {
 	NORTH,EAST,SOUTH,WEST;

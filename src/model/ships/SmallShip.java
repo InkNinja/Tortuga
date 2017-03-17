@@ -1,7 +1,7 @@
-package ships;
+package model.ships;
 
-import directions.Direction;
-import directions.IllegalDirection;
+import controller.directions.Direction;
+import controller.directions.IllegalDirection;
 
 public class SmallShip extends AbstractShip{
 

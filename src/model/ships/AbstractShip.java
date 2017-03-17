@@ -1,6 +1,6 @@
-package ships;
+package model.ships;
 
-import directions.*;
+import controller.directions.*;
 
 public abstract class AbstractShip {
 	
