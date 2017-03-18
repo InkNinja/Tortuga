@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import controller.directions.Direction;
+import controller.directions.ComplexDirection;
+import controller.viewUpdate.FieldUpdate;
 
 public class FieldPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -32,7 +34,7 @@ public class FieldPanel extends JPanel{
 		setLayout(new GridBagLayout());
 		
 		GridBagConstraints c = new GridBagConstraints();
-		DirectionPanel nw = new DirectionPanel(Direction.NORTH,Direction.WEST);
+		DirectionPanel nw = new DirectionPanel(ComplexDirection.NORTHWEST);
 		dirs.add(nw);
 		c.weightx = weightDir;
 		c.weighty = weightDir;
@@ -41,7 +43,7 @@ public class FieldPanel extends JPanel{
 		this.add(nw,c);
 		
 		c = new GridBagConstraints();
-		DirectionPanel n = new DirectionPanel(Direction.NORTH,Direction.NORTH);
+		DirectionPanel n = new DirectionPanel(ComplexDirection.NORTH);
 		dirs.add(n);
 		c.weightx = weightDir;
 		c.weighty = weightDir;
@@ -50,7 +52,7 @@ public class FieldPanel extends JPanel{
 		this.add(n,c);
 		
 		c = new GridBagConstraints();
-		DirectionPanel ne = new DirectionPanel(Direction.NORTH,Direction.EAST);
+		DirectionPanel ne = new DirectionPanel(ComplexDirection.NORTHEAST);
 		dirs.add(ne);
 		c.weightx = weightDir;
 		c.weighty = weightDir;
@@ -59,7 +61,7 @@ public class FieldPanel extends JPanel{
 		this.add(ne,c);
 		
 		c = new GridBagConstraints();
-		DirectionPanel w = new DirectionPanel(Direction.WEST,Direction.WEST);
+		DirectionPanel w = new DirectionPanel(ComplexDirection.WEST);
 		dirs.add(w);
 		c.weightx = weightDir;
 		c.weighty = weightDir;
@@ -68,7 +70,7 @@ public class FieldPanel extends JPanel{
 		this.add(w,c);
 		
 		c = new GridBagConstraints();
-		DirectionPanel e = new DirectionPanel(Direction.EAST,Direction.EAST);
+		DirectionPanel e = new DirectionPanel(ComplexDirection.EAST);
 		dirs.add(e);
 		c.weightx = weightDir;
 		c.weighty = weightDir;
@@ -77,7 +79,7 @@ public class FieldPanel extends JPanel{
 		this.add(e,c);
 		
 		c = new GridBagConstraints();
-		DirectionPanel sw = new DirectionPanel(Direction.SOUTH,Direction.WEST);
+		DirectionPanel sw = new DirectionPanel(ComplexDirection.SOUTHWEST);
 		dirs.add(sw);
 		c.weightx = weightDir;
 		c.weighty = weightDir;
@@ -86,7 +88,7 @@ public class FieldPanel extends JPanel{
 		this.add(sw,c);
 		
 		c = new GridBagConstraints();
-		DirectionPanel s = new DirectionPanel(Direction.SOUTH,Direction.SOUTH);
+		DirectionPanel s = new DirectionPanel(ComplexDirection.SOUTH);
 		dirs.add(s);
 		c.weightx = weightDir;
 		c.weighty = weightDir;
@@ -95,7 +97,7 @@ public class FieldPanel extends JPanel{
 		this.add(s,c);
 		
 		c = new GridBagConstraints();
-		DirectionPanel se = new DirectionPanel(Direction.SOUTH,Direction.EAST);
+		DirectionPanel se = new DirectionPanel(ComplexDirection.SOUTHEAST);
 		dirs.add(se);
 		c.weightx = weightDir;
 		c.weighty = weightDir;
@@ -109,6 +111,18 @@ public class FieldPanel extends JPanel{
 		c.gridx = 1;
 		c.gridy = 1;
 		this.add(shipPane,c);	
+	}
+	
+	public void update(FieldUpdate data)
+	{
+		shipPane.update(data.getShipIcon());
+		for(DirectionPanel dPanel: dirs)
+		{
+			ComplexDirection direction = dPanel.direction;
+			ImageIcon icon = data.getDirectionIcon(direction);
+			dPanel.update(icon);
+		}
+		setBackground(data.getBackground());
 	}
 	
 }

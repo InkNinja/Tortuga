@@ -5,12 +5,12 @@ import controller.directions.*;
 public abstract class AbstractShip {
 	
 	public String spriteName;
-	public Direction face;
+	public SimpleDirection face;
 	public Faction side;
 	
 	public AbstractShip(Faction side){
 		this.side = side;
-		face = Direction.EAST;
+		face = SimpleDirection.EAST;
 		makeSpriteName();
 	}
 	
@@ -23,21 +23,14 @@ public abstract class AbstractShip {
 		return spriteName;
 	}
 	
-	public boolean canTurn(Direction target){
+	public boolean canTurn(ComplexDirection target){
 		return face.canTurn(target);
 	}
 	
-	public void turn(Direction target) throws CannotTurnException{
-		if(face.canTurn(target))
-		{
-			face = target;
-		}
-		else
-		{
-			throw new CannotTurnException();
-		}
+	public void turn(SimpleDirection target){
+		face = target;
 	}
 
-	public abstract boolean canMove(Direction main,Direction secondary) throws IllegalDirection;
+	public abstract boolean canMove(ComplexDirection target);
 	
 }

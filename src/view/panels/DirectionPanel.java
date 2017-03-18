@@ -4,12 +4,11 @@ package view.panels;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.directions.Direction;
+import controller.directions.ComplexDirection;
 
 public class DirectionPanel extends JPanel{
 	
@@ -18,16 +17,12 @@ public class DirectionPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	public static final int panelSize = 20;
-	
-	Direction main;
-	Direction secondary;
+	ComplexDirection direction;
 	JLabel flag;
 	
-	public DirectionPanel(Direction main, Direction secondary) throws IOException
+	public DirectionPanel(ComplexDirection direction)
 	{
-		
-		this.main = main;
-		this.secondary = secondary;
+		this.direction = direction;
 		this.setSize(new Dimension(panelSize,panelSize));
 		this.setMaximumSize(new Dimension(panelSize,panelSize));
 		this.setMinimumSize(new Dimension(panelSize,panelSize));
@@ -44,23 +39,9 @@ public class DirectionPanel extends JPanel{
 		this.add(flag,c);		
 	}
 	
-	public DirectionPanel(Direction main) throws IOException
-	{
-		this(main,main);
-	}
-	
-	public void canMove(ImageIcon img) throws IOException
+	public void update(ImageIcon img)
 	{
 		flag.setIcon(img);
 	}
 	
-	public void canTurn(ImageIcon img) throws IOException
-	{
-		flag.setIcon(img);
-	}
-	
-	public void none()
-	{
-		flag.setIcon(null);
-	}
 }

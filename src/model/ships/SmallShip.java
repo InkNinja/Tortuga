@@ -1,7 +1,6 @@
 package model.ships;
 
-import controller.directions.Direction;
-import controller.directions.IllegalDirection;
+import controller.directions.ComplexDirection;
 
 public class SmallShip extends AbstractShip{
 
@@ -10,14 +9,9 @@ public class SmallShip extends AbstractShip{
 	}
 
 	@Override
-	public boolean canMove(Direction main, Direction secondary) throws IllegalDirection {
-		if(main==secondary && main == face)
-			return true;
-		else
-		{
-			Direction.ifProper(main, secondary);
-			return false;
-		}
+	public boolean canMove(ComplexDirection target) {
+		return target.simple && target.main == face;
 	}
+
 
 }
