@@ -15,8 +15,7 @@ import model.ships.AbstractShip;
 public class LoadSprite {
 	
 	private final static int iconSize = 80;
-	//TODO zmien to na wartoœ podan¹ przez controlera
-	//TODO przenieœ siê do modelu
+	//TODO zmodyfikuj ca³¹ klasê
 	
 	public static ImageIcon getSprite(int size,String path) throws IOException
 	{

@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import controller.config.*;
 
 import controller.directions.ComplexDirection;
 
@@ -16,17 +17,20 @@ public class DirectionPanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final int panelSize = 20;
+	public static final Dimension size = Params.getDirectionPanelSize();
 	ComplexDirection direction;
 	JLabel flag;
+	final int x,y;
 	
-	public DirectionPanel(ComplexDirection direction)
+	public DirectionPanel(ComplexDirection direction,int x, int y)
 	{
+		this.x = x;
+		this.y = y;
 		this.direction = direction;
-		this.setSize(new Dimension(panelSize,panelSize));
-		this.setMaximumSize(new Dimension(panelSize,panelSize));
-		this.setMinimumSize(new Dimension(panelSize,panelSize));
-		this.setPreferredSize(new Dimension(panelSize,panelSize));
+		this.setSize(size);
+		this.setMaximumSize(size);
+		this.setMinimumSize(size);
+		this.setPreferredSize(size);
 		setLayout(new GridBagLayout());
 		flag = new JLabel();
 

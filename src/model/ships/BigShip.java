@@ -12,7 +12,4 @@ public class BigShip extends AbstractShip{
 	public boolean canMove(ComplexDirection target) {
 		return target.main == face;
 	}
-
-
-
 }

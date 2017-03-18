@@ -11,6 +11,8 @@ public class FieldUpdate {
 	private ImageIcon shipIcon;
 	private TreeMap<ComplexDirection,ImageIcon> directionMap;
 	private Color background;
+	public int x;
+	public int y;
 	
 	public ImageIcon getShipIcon()
 	{
