@@ -1,10 +1,12 @@
 package view.panels;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import controller.config.Params;
+
+import controller.viewConfig.Params;
 
 public class ShipPanel extends JPanel{
 	
@@ -21,6 +23,7 @@ public class ShipPanel extends JPanel{
 		setMinimumSize(size);
 		setPreferredSize(size);	
 		picLabel = new JLabel();
+		this.setBackground(Color.BLUE);
 		add(picLabel);
 	}
 	

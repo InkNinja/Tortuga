@@ -7,9 +7,9 @@ import java.awt.GridBagLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import controller.config.*;
 
 import controller.directions.ComplexDirection;
+import controller.viewConfig.*;
 
 public class DirectionPanel extends JPanel{
 	

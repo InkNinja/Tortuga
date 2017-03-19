@@ -1,17 +1,14 @@
 package view.panels;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.LinkedList;
-
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import controller.config.Params;
 import controller.directions.ComplexDirection;
+import controller.viewConfig.Params;
 import controller.viewUpdate.FieldUpdate;
 
 public class FieldPanel extends JPanel{
@@ -32,7 +29,6 @@ public class FieldPanel extends JPanel{
 		this.setMaximumSize(size);
 		this.setMinimumSize(size);
 		this.setPreferredSize(size);
-		setBorder(BorderFactory.createLineBorder(Color.black));
 		this.shipPane = new ShipPanel(x,y);
 		dirs = new LinkedList<DirectionPanel>();
 		setLayout(new GridBagLayout());

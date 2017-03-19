@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
-import controller.config.Params;
+import controller.viewConfig.Params;
 import controller.viewUpdate.FieldUpdate;
 
 public class BoardPanel extends JPanel{
