@@ -1,5 +1,6 @@
 package view.panels;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -17,6 +18,8 @@ public class ScorePanel extends JPanel{
 	public ShipPanel[] ships;
 	public static final Dimension size = Params.getScorePanelSize();
 	public static final int gapsSize = Params.getfieldGapsSize();
+	private final Color background = Params.boardBackground;
+	private final Color water = Params.fieldClearBackground;
 	private int sinken; 
 	private int score;
 	
@@ -28,6 +31,7 @@ public class ScorePanel extends JPanel{
 		this.setMaximumSize(size);
 		this.setMinimumSize(size);
 		this.setPreferredSize(size);
+		this.setBackground(background);
 		ships = new ShipPanel[5];
 		GridLayout layout = new GridLayout(5,1);
 		layout.setHgap(gapsSize);
@@ -43,14 +47,14 @@ public class ScorePanel extends JPanel{
 	
 	public void update(ImageIcon icon, int score)
 	{
-		ships[sinken].update(icon);
+		ships[sinken].update(icon,water);
 		sinken++;
 		this.score+=score;
 	}
 	
 	public void update(ImageIcon icon, int shipToChange,int score,int sinken)
 	{
-		ships[shipToChange].update(icon);
+		ships[shipToChange].update(icon,water);
 		this.score += score;
 		this.sinken+=sinken;
 	}

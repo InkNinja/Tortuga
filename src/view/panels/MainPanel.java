@@ -1,5 +1,6 @@
 package view.panels;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -20,6 +21,7 @@ public class MainPanel extends JPanel{
 	public ScorePanel loyalists;
 	public BoardPanel board;
 	public Dimension size = Params.getMainPanelSize();
+	private final Color background = Params.boardBackground;
 	
 	public MainPanel(){
 		super();
@@ -27,25 +29,27 @@ public class MainPanel extends JPanel{
 		this.setMaximumSize(size);
 		this.setMinimumSize(size);
 		this.setPreferredSize(size);
+		this.setBackground(background);
 		pirates = new ScorePanel();
 		loyalists = new ScorePanel();
 		board = new BoardPanel();
 		
 		setLayout(new GridBagLayout());		
 		GridBagConstraints c = new GridBagConstraints();
-		c.insets = new Insets(0,0,0,50);
+		c.insets = new Insets(25,35,25,25);
 		c.anchor = GridBagConstraints.LINE_START;
 		c.gridx=0;
 		c.gridy=0;
 		add(pirates, c);
 		
 		c = new GridBagConstraints();
+		c.insets = new Insets(25,25,25,25);
 		c.gridx = 1;
 		c.gridy = 0;
 		add(board, c);
 		
 		c = new GridBagConstraints();
-		c.insets = new Insets(0,50,0,0);
+		c.insets = new Insets(25,25,25,35);
 		c.anchor = GridBagConstraints.LINE_END;
 		c.gridx=2;
 		c.gridy=0;

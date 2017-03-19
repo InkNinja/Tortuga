@@ -3,6 +3,7 @@ package view.panels;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 
 import controller.viewConfig.Params;
@@ -13,7 +14,7 @@ public class BoardPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private final Dimension size = Params.getBoardPanelSize();
 	private final int gapsSize = Params.getfieldGapsSize();
-	private final Color background = Params.getBoardBackground();
+	private final Color background = Params.boardBackground;
 	FieldPanel board[][];
 	
 	public BoardPanel(){
@@ -33,6 +34,11 @@ public class BoardPanel extends JPanel{
 			{
 				board[x][y] = new FieldPanel(x,y);
 				add(board[x][y]);
+				if(x%3 == 0 && y%3 == 0)
+				{
+					controller.viewUpdate.FieldUpdate data = new controller.viewUpdate.FieldUpdate(x, y, null, Params.boardBackground);
+					update(data);
+				}
 			}
 	}
 	

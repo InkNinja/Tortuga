@@ -1,4 +1,4 @@
-package view.listeners;
+package view.listeners.windows;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

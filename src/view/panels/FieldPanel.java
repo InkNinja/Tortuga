@@ -29,6 +29,7 @@ public class FieldPanel extends JPanel{
 		this.setMaximumSize(size);
 		this.setMinimumSize(size);
 		this.setPreferredSize(size);
+		this.setBackground(Params.fieldFogBackground);
 		this.shipPane = new ShipPanel(x,y);
 		dirs = new LinkedList<DirectionPanel>();
 		setLayout(new GridBagLayout());
@@ -115,12 +116,12 @@ public class FieldPanel extends JPanel{
 	
 	public void update(FieldUpdate data)
 	{
-		shipPane.update(data.getShipIcon());
+		shipPane.update(data.getShipIcon(),data.getBackground());
 		for(DirectionPanel dPanel: dirs)
 		{
 			ComplexDirection direction = dPanel.direction;
 			ImageIcon icon = data.getDirectionIcon(direction);
-			dPanel.update(icon);
+			dPanel.update(icon,data.getBackground());
 		}
 		setBackground(data.getBackground());
 	}

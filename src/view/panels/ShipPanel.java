@@ -21,14 +21,15 @@ public class ShipPanel extends JPanel{
 		setSize(size);
 		setMaximumSize(size);
 		setMinimumSize(size);
-		setPreferredSize(size);	
+		setPreferredSize(size);
+		setBackground(Params.fieldFogBackground);
 		picLabel = new JLabel();
-		this.setBackground(Color.BLUE);
 		add(picLabel);
 	}
 	
-	public void update(ImageIcon icon)
+	public void update(ImageIcon icon,Color background)
 	{
 		picLabel.setIcon(icon);
+		setBackground(background);
 	}
 }

@@ -5,14 +5,14 @@ import java.awt.Dimension;
 
 public final class Params {
 
-	private final static int shipPanelSize = 80;
+	private final static int shipPanelSize = 90;
 	private final static int directionPanelSize = 20;
 	private final static int flagIconSize = 10;
 	private static int fieldGapsSize = 10;
-	private final static Color boardBackground = new Color(150,75,0);
+	public final static Color boardBackground = new Color(150,75,0);
+	public final static Color fieldFogBackground = Color.BLUE;
+	public final static Color fieldClearBackground = Color.CYAN;
 	private final static int mainPanelWidth = 800;
-	//private final static Color fogBackground;
-	//private final static Color waterBackground;
 	
 	private static int fieldPanelSize(){
 		return 2*directionPanelSize+shipPanelSize;
@@ -22,21 +22,17 @@ public final class Params {
 		return 4*fieldPanelSize() + 3*fieldGapsSize;
 	}
 	
-	public static Color getBoardBackground(){
-		return boardBackground;
-	}
-	
 	public static int scorePanelSize(){
 		return 5*shipPanelSize + 4* fieldGapsSize;
 	}
 	
 	public static int mainPanelWidth(){
-		int width = shipPanelSize*2+boardPanelSize()+100;
+		int width = shipPanelSize*2+boardPanelSize()+150;
 		return mainPanelWidth>width?mainPanelWidth:width;
 	}
 	
 	public static Dimension getMainWindowSize(){
-		return new Dimension(mainPanelWidth(),mainPanelHeigth()+50);
+		return new Dimension(mainPanelWidth(),mainPanelHeigth()+60);
 	}
 	
 	public static Dimension getMainPanelSize(){
@@ -44,7 +40,7 @@ public final class Params {
 	}
 	
 	public static int mainPanelHeigth(){
-		return (8*directionPanelSize-shipPanelSize-fieldGapsSize>0?boardPanelSize():scorePanelSize());
+		return (8*directionPanelSize-shipPanelSize-fieldGapsSize>0?boardPanelSize()+30:scorePanelSize()+30);
 	}
 	
 	public static Dimension getScorePanelSize(){
@@ -82,6 +78,10 @@ public final class Params {
 	public static double getDirectionPanelWeight()
 	{
 		return directionPanelSize/fieldPanelSize();
+	}
+
+	public static int shipPanelSize() {
+		return shipPanelSize;
 	}
 	
 }

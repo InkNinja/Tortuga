@@ -1,4 +1,4 @@
-package view.listeners;
+package view.listeners.windows;
 
 import gameConfig.GameType;
 import view.actions.NewPvP1PCGameAction;

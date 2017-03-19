@@ -1,6 +1,7 @@
 package view.panels;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -31,6 +32,7 @@ public class DirectionPanel extends JPanel{
 		this.setMaximumSize(size);
 		this.setMinimumSize(size);
 		this.setPreferredSize(size);
+		this.setBackground(Params.fieldFogBackground);
 		setLayout(new GridBagLayout());
 		flag = new JLabel();
 
@@ -43,9 +45,10 @@ public class DirectionPanel extends JPanel{
 		this.add(flag,c);		
 	}
 	
-	public void update(ImageIcon img)
+	public void update(ImageIcon img,Color background)
 	{
 		flag.setIcon(img);
+		this.setBackground(background);
 	}
 	
 }
