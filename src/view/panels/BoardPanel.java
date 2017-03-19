@@ -3,11 +3,12 @@ package view.panels;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
 
 import javax.swing.JPanel;
 
-import controller.viewConfig.Params;
-import controller.viewUpdate.FieldUpdate;
+import view.params.Params;
+import view.update.FieldUpdate;
 
 public class BoardPanel extends JPanel{
 
@@ -36,15 +37,15 @@ public class BoardPanel extends JPanel{
 				add(board[x][y]);
 				if(x%3 == 0 && y%3 == 0)
 				{
-					controller.viewUpdate.FieldUpdate data = new controller.viewUpdate.FieldUpdate(x, y, null, Params.boardBackground);
+					view.update.FieldUpdate data = new view.update.FieldUpdate(new Point(x,y), null, Params.boardBackground);
 					update(data);
 				}
 			}
 	}
 	
 	public void update(FieldUpdate data){
-		int x = data.x;
-		int y = data.y;
+		int x = data.field.x;
+		int y = data.field.y;
 		board[x][y].update(data);
 	}
 	

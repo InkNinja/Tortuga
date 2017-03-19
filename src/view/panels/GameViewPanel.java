@@ -5,33 +5,35 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import controller.viewConfig.Params;
-import controller.viewUpdate.FieldUpdate;
+import model.game.ships.Faction;
+import view.params.Params;
+import view.update.FieldUpdate;
 
-public class MainPanel extends JPanel{
+public class GameViewPanel extends JPanel{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public ScorePanel pirates;
-	public ScorePanel loyalists;
 	public BoardPanel board;
 	public Dimension size = Params.getMainPanelSize();
 	private final Color background = Params.boardBackground;
+	public TreeMap<Faction,ScorePanel> map;
 	
-	public MainPanel(){
+	public GameViewPanel(){
 		super();
 		this.setSize(size);
 		this.setMaximumSize(size);
 		this.setMinimumSize(size);
 		this.setPreferredSize(size);
 		this.setBackground(background);
-		pirates = new ScorePanel();
-		loyalists = new ScorePanel();
+		map = new TreeMap<Faction,ScorePanel>();
+		map.put(Faction.LOYALISTS, new ScorePanel());
+		map.put(Faction.PIRATES, new ScorePanel());
 		board = new BoardPanel();
 		
 		setLayout(new GridBagLayout());		
@@ -40,7 +42,7 @@ public class MainPanel extends JPanel{
 		c.anchor = GridBagConstraints.LINE_START;
 		c.gridx=0;
 		c.gridy=0;
-		add(pirates, c);
+		add(map.get(Faction.PIRATES), c);
 		
 		c = new GridBagConstraints();
 		c.insets = new Insets(25,25,25,25);
@@ -53,17 +55,12 @@ public class MainPanel extends JPanel{
 		c.anchor = GridBagConstraints.LINE_END;
 		c.gridx=2;
 		c.gridy=0;
-		add(loyalists, c);
+		add(map.get(Faction.LOYALISTS), c);
 	}
 	
-	public void updateScorePanel(ScorePanel panel,ImageIcon icon,int score)
+	public void updateScorePanel(Faction side,ImageIcon icon)
 	{
-		panel.update(icon, score);
-	}
-	
-	public void updateScorePanel(ScorePanel panel,ImageIcon icon,int shipToChange,int score, int sinken)
-	{
-		panel.update(icon, shipToChange, score, sinken);
+		map.get(side).update(icon);
 	}
 	
 	public void updateBoardPanel(FieldUpdate data)
@@ -72,8 +69,9 @@ public class MainPanel extends JPanel{
 	}
 	
 	public void resetPanels(){
-		pirates = new ScorePanel();
-		loyalists = new ScorePanel();
+		map = new TreeMap<Faction,ScorePanel>();
+		map.put(Faction.LOYALISTS, new ScorePanel());
+		map.put(Faction.PIRATES, new ScorePanel());
 		board = new BoardPanel();
 	}
 	

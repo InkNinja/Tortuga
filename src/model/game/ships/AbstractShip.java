@@ -1,6 +1,6 @@
-package model.ships;
+package model.game.ships;
 
-import controller.directions.*;
+import model.game.directions.*;
 
 public abstract class AbstractShip {
 	
@@ -23,7 +23,7 @@ public abstract class AbstractShip {
 		return spriteName;
 	}
 	
-	public boolean canTurn(ComplexDirection target){
+	public boolean canTurn(SimpleDirection target){
 		return face.canTurn(target);
 	}
 	
@@ -32,5 +32,7 @@ public abstract class AbstractShip {
 	}
 
 	public abstract boolean canMove(ComplexDirection target);
+	
+	public abstract int value();
 	
 }

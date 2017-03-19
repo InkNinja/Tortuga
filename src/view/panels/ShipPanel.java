@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.viewConfig.Params;
+import view.params.Params;
 
 public class ShipPanel extends JPanel{
 	

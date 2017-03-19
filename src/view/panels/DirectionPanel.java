@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.directions.ComplexDirection;
-import controller.viewConfig.*;
+import model.game.directions.ComplexDirection;
+import view.params.Params;
 
 public class DirectionPanel extends JPanel{
 	

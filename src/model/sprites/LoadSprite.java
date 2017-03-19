@@ -10,13 +10,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import controller.viewConfig.Params;
-import model.ships.AbstractShip;
+import model.game.ships.AbstractShip;
+import view.params.Params;
 
 public class LoadSprite {
 	
 	private final static int iconSize = Params.shipPanelSize();
-	//TODO zmodyfikuj ca³¹ klasê
+	//TODO zmodyfikuj i zastanów siê w jakim pakiecie umiescic
 	
 	public static ImageIcon getSprite(int size,String path) throws IOException
 	{

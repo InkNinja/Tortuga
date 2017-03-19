@@ -1,4 +1,4 @@
-package controller.viewConfig;
+package view.params;
 
 import java.awt.Color;
 import java.awt.Dimension;

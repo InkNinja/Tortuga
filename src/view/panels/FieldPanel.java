@@ -7,9 +7,9 @@ import java.util.LinkedList;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import controller.directions.ComplexDirection;
-import controller.viewConfig.Params;
-import controller.viewUpdate.FieldUpdate;
+import model.game.directions.ComplexDirection;
+import view.params.Params;
+import view.update.FieldUpdate;
 
 public class FieldPanel extends JPanel{
 	private static final long serialVersionUID = 1L;

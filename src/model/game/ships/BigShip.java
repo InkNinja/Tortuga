@@ -1,6 +1,6 @@
-package model.ships;
+package model.game.ships;
 
-import controller.directions.ComplexDirection;
+import model.game.directions.ComplexDirection;
 
 public class BigShip extends AbstractShip{
 
@@ -10,6 +10,11 @@ public class BigShip extends AbstractShip{
 
 	@Override
 	public boolean canMove(ComplexDirection target) {
-		return target.main == face;
+		return target.contain(face);
+	}
+
+	@Override
+	public int value() {
+		return 3;
 	}
 }

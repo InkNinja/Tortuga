@@ -1,24 +1,22 @@
-package controller.viewUpdate;
+package view.update;
 
 import java.awt.Color;
-import java.io.IOException;
+import java.awt.Point;
 import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
 
-import controller.directions.ComplexDirection;
+import model.game.directions.ComplexDirection;
 
 public class FieldUpdate {
 	private ImageIcon shipIcon;
 	public TreeMap<ComplexDirection,ImageIcon> directionMap;
 	private Color background;
-	public int x;
-	public int y;
+	public Point field;
 	
-	public FieldUpdate(int x, int y,ImageIcon icon,Color background)
+	public FieldUpdate(Point field,ImageIcon icon,Color background)
 	{
-		this.x = x;
-		this.y = y;
+		this.field = field;
 		this.shipIcon = icon;
 		this.background = background;
 		directionMap = new TreeMap<ComplexDirection,ImageIcon>();

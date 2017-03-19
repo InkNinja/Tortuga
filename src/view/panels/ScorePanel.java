@@ -6,27 +6,23 @@ import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
-import controller.viewConfig.*;
+import view.params.Params;
 
 public class ScorePanel extends JPanel{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//public Faction side;
 	public ShipPanel[] ships;
 	public static final Dimension size = Params.getScorePanelSize();
 	public static final int gapsSize = Params.getfieldGapsSize();
 	private final Color background = Params.boardBackground;
 	private final Color water = Params.fieldClearBackground;
-	private int sinken; 
-	private int score;
+	private int sunk; 
 	
 	public ScorePanel(){
 		super();
-		sinken = 0;
-		score = 0;
+		sunk = 0;
 		this.setSize(size);
 		this.setMaximumSize(size);
 		this.setMinimumSize(size);
@@ -45,22 +41,10 @@ public class ScorePanel extends JPanel{
 		
 	}
 	
-	public void update(ImageIcon icon, int score)
+	public void update(ImageIcon icon)
 	{
-		ships[sinken].update(icon,water);
-		sinken++;
-		this.score+=score;
+		ships[sunk].update(icon,water);
+		sunk++;
 	}
 	
-	public void update(ImageIcon icon, int shipToChange,int score,int sinken)
-	{
-		ships[shipToChange].update(icon,water);
-		this.score += score;
-		this.sinken+=sinken;
-	}
-	
-	public int getScore()
-	{
-		return score;
-	}
 }
