@@ -1,11 +1,11 @@
 Tortuga
 
-This project is implementation of "The Battle for Tortuga" (pl. "Bitwa o Tortugê") - board game published by FoxGames
+This project is implementation of "The Battle for Tortuga" (pl. "Bitwa o TortugÃª") - board game published by FoxGames
 
 "The Battle for Tortuga" is a fast paced strategic game about sea battle of loyalists and pirates.
 Players goal is to uncover their hidden ships, outmaneuver enemy and destroy most of his fleet (bigger ships values more).
 
-Project plan (Achieved goals: none so far)
+Project plan (Achieved goals: 1. to some degree)
 
 1.
 -Ability for two players battle each other on one PC
