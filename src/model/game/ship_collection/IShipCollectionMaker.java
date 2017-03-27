@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import model.game.ships.*;
 
-public interface ShipCollectionAbstractMaker {
+public interface IShipCollectionMaker {
 	
 	public abstract LinkedList<AbstractShip> makeShipCollection();
 	

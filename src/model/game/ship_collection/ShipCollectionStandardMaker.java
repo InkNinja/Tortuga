@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 import model.game.ships.*;
 
-public enum ShipCollectionStandardMaker implements ShipCollectionAbstractMaker {
+public enum ShipCollectionStandardMaker implements IShipCollectionMaker {
 
 	STANDARD;
 	

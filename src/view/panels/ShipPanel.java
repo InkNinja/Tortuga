@@ -2,6 +2,8 @@ package view.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,11 +15,10 @@ public class ShipPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	public final static Dimension size = Params.getShipPanelSize();
 	JLabel picLabel;	
-	final int x, y;
+	final Point coordinates;
 	
-	public ShipPanel(int x, int y){
-		this.x = x;
-		this.y = y;
+	public ShipPanel(Point coordinates){
+		this.coordinates = coordinates;
 		setSize(size);
 		setMaximumSize(size);
 		setMinimumSize(size);
@@ -26,7 +27,8 @@ public class ShipPanel extends JPanel{
 		picLabel = new JLabel();
 		add(picLabel);
 	}
-	
+
+
 	public void update(ImageIcon icon,Color background)
 	{
 		picLabel.setIcon(icon);

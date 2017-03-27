@@ -2,7 +2,7 @@ package model.game.directions;
 
 public enum SimpleDirection{
 
-	NORTH(1),EAST(1),SOUTH(-1),WEST(-1);
+	NORTH(-1),EAST(1),SOUTH(1),WEST(-1);
 	
 	public final int value;
 

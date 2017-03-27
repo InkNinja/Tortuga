@@ -4,102 +4,131 @@ import java.awt.Point;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
-import model.game.directions.ComplexDirection;
-import model.game.directions.SimpleDirection;
-import model.game.exceptions.FriendlyFireException;
-import model.game.exceptions.IllegalFieldException;
-import model.game.exceptions.IllegalShipUncover;
-import model.game.exceptions.IllegalTurnException;
-import model.game.exceptions.NoShipToMoveException;
-import model.game.exceptions.OutOfBoardMoveException;
+import model.game.directions.*;
+import model.game.exceptions.*;
 import model.game.ship_collection.ShipCollection;
-import model.game.ship_collection.ShipCollectionAbstractMaker;
-import model.game.ships.AbstractShip;
-import model.game.ships.Faction;
+import model.game.ship_collection.IShipCollectionMaker;
+import model.game.ships.*;
 
 public class Game {
 	
-	private ShipCollection ships;
+	public ShipCollection ships;
 	private Field board[][];
-	private Point recentlyUncovered;
+	public Point recentlyUncovered;
 	private TreeMap<Faction,LinkedList<AbstractShip>>score;
+	protected Faction activeFaction;
 	
-	public Game(ShipCollectionAbstractMaker maker){
+	public Faction getActiveFaction(){
+		return activeFaction;
+	}
+	
+	
+	public Game(IShipCollectionMaker maker,Faction whoStarts){
 		ships = new ShipCollection(maker);
 		board = new Field[4][4];
 		recentlyUncovered = null;
+		activeFaction = whoStarts;
 		score = new TreeMap<Faction,LinkedList<AbstractShip>>();
 		score.put(Faction.LOYALISTS, new LinkedList<AbstractShip>());
 		score.put(Faction.PIRATES, new LinkedList<AbstractShip>());
 		for(int x = 0; x < 4; x++)
-		{
 			for(int y =0; y < 4; y++)
-			{
-				if(!illegal(x,y))
-				{
+				try{
+					illegalTest(x,y);
 					board[x][y]= new Field();
 				}
-				else
-				{
+				catch(IllegalFieldException e){	
 					board[x][y]=null;
 				}
-			}
-		}
 	}
 	
-	private Field getField(Point field){
+	public Field getField(Point field) throws IllegalFieldException{
 		int x = field.x;
 		int y = field.y;
+		illegalTest(x,y);
 		return board[x][y];
 	}
 	
-	private boolean illegal(int x, int y){
-		return x<0 || x>3 || y<0 || y > 3 || (x%3==0 && y%3 == 0);
+	private void illegalTest(int x, int y) throws IllegalFieldException{
+		if(x<0 || x>3 || y<0 || y > 3 || (x%3==0 && y%3 == 0))
+			throw new IllegalFieldException();
 	}
 	
-	public void uncover(Point field) throws IllegalFieldException, IllegalShipUncover{
-		if(illegal(field.x,field.y))
-			throw new IllegalFieldException();
+	public void uncover(Point field) throws 
+													IllegalFieldException, 
+													IllegalShipUncover, 
+													FirstTurnExpectedException, 
+													ShipCollectionIsEmpty{
+		if(recentlyUncovered!=null)
+			throw new FirstTurnExpectedException();		
 		getField(field).uncover(ships);
 		recentlyUncovered = field;
 	}
 	
-	public void turn(Point field,SimpleDirection target) throws IllegalFieldException, NoShipToMoveException, IllegalTurnException{
-		if(illegal(field.x,field.y))
-			throw new IllegalFieldException();
-		if(recentlyUncovered == field)
+	public void turn(Point field,SimpleDirection target) throws 
+													IllegalFieldException, 
+													NoShipToMoveException, 
+													IllegalTurnException, 
+													FirstTurnExpectedException, 
+													NotYourShipException{
+		if(field.equals(recentlyUncovered)){
 			getField(field).firstTurnShip(target);
-		else
-			getField(field).turnShip(target);
-		recentlyUncovered = null;
+			recentlyUncovered = null;
+			activeFaction = activeFaction.getEnemy();
+			return;
+		}
+		if(recentlyUncovered!=null)
+			throw new FirstTurnExpectedException();
+		if(getField(field).ship!=null)
+			if(getField(field).ship.side != activeFaction)
+				throw new NotYourShipException();
+		getField(field).turnShip(target);
+		activeFaction = activeFaction.getEnemy();
 	}
 	
-	public Point move(Point field,ComplexDirection target) throws IllegalFieldException, NoShipToMoveException, OutOfBoardMoveException, FriendlyFireException{
-		Point newPoint = new Point(field);
-		if(illegal(field.x,field.y))
-			throw new IllegalFieldException();
-		Field oldField = getField(field);
-		Point translate = getField(field).getMove(target);
-		int dx = translate.x;
-		int dy = translate.y;
-		newPoint.translate(dx, dy);
-		if(illegal(newPoint.x,newPoint.y))
-			throw new OutOfBoardMoveException();
-		Field newField = getField(field);
-		if(oldField.ship.side == newField.ship.side)
-			throw new FriendlyFireException();
-		AbstractShip ship = oldField.ship;
-		AbstractShip sunk = newField.ship;
-		score.get(sunk.side.getEnemy()).addLast(sunk);
-		oldField.updateShip(null);
-		newField.updateShip(ship);
+	private Point getNewPoint(Point oldPoint,ComplexDirection target) throws 
+													IllegalFieldException, 
+													NoShipToMoveException, 
+													IllegalMoveDirection{
+		Point newPoint = new Point(oldPoint);
+		Point translate = getField(oldPoint).getMove(target);
+		System.out.println(target);
+		System.out.println(translate.x+ " "+translate.y);
+		newPoint.translate(translate.x,translate.y);
+		illegalTest(newPoint.x,newPoint.y);
 		return newPoint;
 	}
 	
-	public Faction getWinner()
-	{
-		for(Faction faction : Faction.values())
-		{
+	public Point move(Point oldPoint,ComplexDirection target) throws 
+													IllegalFieldException, 
+													NoShipToMoveException, 
+													OutOfBoardMoveException, 
+													FriendlyFireException, 
+													FirstTurnExpectedException, 
+													IllegalMoveDirection, 
+													NotYourShipException{
+		if(getField(oldPoint).ship!=null)
+			if(getField(oldPoint).ship.side != activeFaction)
+				throw new NotYourShipException();
+		if(recentlyUncovered!=null)
+			throw new FirstTurnExpectedException();
+		Point newPoint = getNewPoint(oldPoint,target);
+		Field oldField = getField(oldPoint);
+		Field newField = getField(newPoint);
+		AbstractShip movingShip = oldField.ship;
+		AbstractShip sunk = newField.ship;
+		if(sunk != null)
+			score.get(sunk.side.getEnemy()).addLast(sunk);
+		oldField.updateShip(null);
+		newField.updateShip(movingShip);
+		activeFaction = activeFaction.getEnemy();
+		System.out.println(oldPoint.x + " "+oldPoint.y);
+		System.out.println(newPoint.x + " "+newPoint.y);
+		return newPoint;
+	}
+	
+	public Faction getWinner(){
+		for(Faction faction : Faction.values()){
 			int points = 0;
 			for(AbstractShip ship: score.get(faction)){
 				points+=ship.value();

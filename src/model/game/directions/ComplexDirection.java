@@ -48,4 +48,13 @@ public enum ComplexDirection{
 		}
 		return null;
 	}
+	
+	public SimpleDirection getSimple(){
+		if(!simple)
+			return null;
+		if(main==null)
+			return secondary;
+		else
+			return main;
+	}
 }

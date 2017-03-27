@@ -9,7 +9,7 @@ import model.game.ships.Faction;
 import model.game.ships.MediumShip;
 import model.game.ships.SmallShip;
 
-public class ShipCollectionCustomMaker implements ShipCollectionAbstractMaker {
+public class ShipCollectionCustomMaker implements IShipCollectionMaker {
 
 	public ArrayList<AbstractShip> ships;
 
@@ -17,22 +17,29 @@ public class ShipCollectionCustomMaker implements ShipCollectionAbstractMaker {
 		ships = new ArrayList<AbstractShip>();
 	}
 	
-	public void add(int size,boolean pirates)
+	public ShipCollectionCustomMaker add(int size,boolean pirates)
 	{
 		AbstractShip ship;
 		Faction side = pirates?Faction.PIRATES:Faction.LOYALISTS;
 		switch(size)
 		{
-		case 1:
-			ship = new SmallShip(side);
-		case 2:
-			ship = new MediumShip(side);
-		case 3:
-			ship = new BigShip(side);
-		default:
-			ship = new BigShip(side);		
+			case 1:{
+				ship = new SmallShip(side);
+				break;
+			}
+			case 2:{
+				ship = new MediumShip(side);
+				break;
+			}
+			case 3:{
+				ship = new BigShip(side);
+				break;
+			}
+			default:
+				ship = new BigShip(side);		
 		}
 		ships.add(ship);
+		return this;
 	}	
 	
 	public LinkedList<AbstractShip> makeShipCollection() {

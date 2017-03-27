@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
@@ -18,7 +19,7 @@ public class BoardPanel extends JPanel{
 	private final Color background = Params.boardBackground;
 	FieldPanel board[][];
 	
-	public BoardPanel(){
+	public BoardPanel() throws IOException{
 		super();
 		this.setSize(size);
 		this.setMaximumSize(size);
@@ -30,10 +31,10 @@ public class BoardPanel extends JPanel{
 		setLayout(layout);
 		setBackground(background);
 		board = new FieldPanel[4][4];
-		for(int x = 0; x < 4 ;x++)
-			for(int y = 0;y<4;y++)
+		for(int y = 0; y < 4 ;y++)
+			for(int x = 0;x<4;x++)
 			{
-				board[x][y] = new FieldPanel(x,y);
+				board[x][y] = new FieldPanel(new Point(x,y));
 				add(board[x][y]);
 				if(x%3 == 0 && y%3 == 0)
 				{
@@ -43,10 +44,23 @@ public class BoardPanel extends JPanel{
 			}
 	}
 	
-	public void update(FieldUpdate data){
+	public void update(FieldUpdate data) throws IOException{
 		int x = data.field.x;
 		int y = data.field.y;
 		board[x][y].update(data);
 	}
+	
+	public void activate(Point field){
+		int x = field.x;
+		int y = field.y;
+		board[x][y].activate();
+	}
+	
+	public void desactivate(Point field){
+		int x = field.x;
+		int y = field.y;
+		board[x][y].desactivate();
+	}
+	
 	
 }

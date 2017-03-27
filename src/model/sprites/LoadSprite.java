@@ -1,6 +1,5 @@
 package model.sprites;
 
-import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -9,22 +8,33 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
 import model.game.ships.AbstractShip;
 import view.params.Params;
 
 public class LoadSprite {
 	
-	private final static int iconSize = Params.shipPanelSize();
+	private final static int iconSize = Params.shipIconSize();
 	//TODO zmodyfikuj i zastanów siê w jakim pakiecie umiescic
 	
-	public static ImageIcon getSprite(int size,String path) throws IOException
+	public static BufferedImage getSprite(String path) throws IOException
 	{
-		BufferedImage img;
-		img = ImageIO.read(new File(path));
-		Image newimg = img.getScaledInstance(size, size,  java.awt.Image.SCALE_SMOOTH); 
-		return new ImageIcon(newimg);
+		BufferedImage img;	
+		if(path == null)
+			img = null;
+		else
+			img = ImageIO.read(new File(path));
+		return img;
 	}
+	
+	public static ImageIcon rescale(BufferedImage img,int size){
+		ImageIcon newimg;
+		if(img == null)
+			newimg = null;
+		else
+			newimg = new ImageIcon(img.getScaledInstance(size, size,  java.awt.Image.SCALE_SMOOTH));
+		return newimg;
+	}
+	
 	
 	public static ImageIcon getSprite(AbstractShip ship) throws IOException
 	{

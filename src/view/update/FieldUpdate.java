@@ -6,21 +6,31 @@ import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
 
+import controller.game_controll.DefaultController;
 import model.game.directions.ComplexDirection;
+import model.game.directions.DirectionState;
+import model.game.exceptions.IllegalFieldException;
 
 public class FieldUpdate {
 	private ImageIcon shipIcon;
-	public TreeMap<ComplexDirection,ImageIcon> directionMap;
+	public TreeMap<ComplexDirection,DirectionState> directionMap;
 	private Color background;
 	public Point field;
+	public static DefaultController game;
 	
 	public FieldUpdate(Point field,ImageIcon icon,Color background)
 	{
 		this.field = field;
 		this.shipIcon = icon;
 		this.background = background;
-		directionMap = new TreeMap<ComplexDirection,ImageIcon>();
+		directionMap = new TreeMap<ComplexDirection,DirectionState>();
 	}
+	
+	public FieldUpdate getDirections() throws IllegalFieldException
+	{
+		return game.addDirections(this);
+	}
+	
 	
 	public ImageIcon getShipIcon()
 	{
@@ -30,11 +40,6 @@ public class FieldUpdate {
 	public Color getBackground()
 	{
 		return background;
-	}
-	
-	public ImageIcon getDirectionIcon(ComplexDirection direction)
-	{
-		return directionMap.get(direction);
 	}
 	
 }

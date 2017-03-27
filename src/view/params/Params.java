@@ -6,6 +6,7 @@ import java.awt.Dimension;
 public final class Params {
 
 	private final static int shipPanelSize = 90;
+	private final static int shipIconSize = 80;
 	private final static int directionPanelSize = 20;
 	private final static int flagIconSize = 10;
 	private static int fieldGapsSize = 10;
@@ -82,6 +83,19 @@ public final class Params {
 
 	public static int shipPanelSize() {
 		return shipPanelSize;
+	}
+	public static int directionPanelSize()
+	{
+		return directionPanelSize;
+	}
+	
+	public static int flagIconSize()
+	{
+		return flagIconSize;
+	}
+	
+	public static int shipIconSize(){
+		return shipIconSize;
 	}
 	
 }

@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
+import java.io.IOException;
 import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
@@ -24,7 +26,7 @@ public class GameViewPanel extends JPanel{
 	private final Color background = Params.boardBackground;
 	public TreeMap<Faction,ScorePanel> map;
 	
-	public GameViewPanel(){
+	public GameViewPanel() throws IOException{
 		super();
 		this.setSize(size);
 		this.setMaximumSize(size);
@@ -63,17 +65,24 @@ public class GameViewPanel extends JPanel{
 		map.get(side).update(icon);
 	}
 	
-	public void updateBoardPanel(FieldUpdate data)
+	public void updateBoardPanel(FieldUpdate data) throws IOException
 	{
 		board.update(data);
 	}
 	
-	public void resetPanels(){
+	public void resetPanels() throws IOException{
 		map = new TreeMap<Faction,ScorePanel>();
 		map.put(Faction.LOYALISTS, new ScorePanel());
 		map.put(Faction.PIRATES, new ScorePanel());
 		board = new BoardPanel();
 	}
 	
+	public void activate(Point field){
+		board.activate(field);
+	}
+	
+	public void desactivate(Point field){
+		board.desactivate(field);
+	}
 	
 }

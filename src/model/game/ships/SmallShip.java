@@ -15,7 +15,6 @@ public class SmallShip extends AbstractShip{
 
 	@Override
 	public int value() {
-		// TODO Auto-generated method stub
 		return 1;
 	}
 

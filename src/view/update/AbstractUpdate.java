@@ -1,5 +1,6 @@
 package view.update;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 import view.panels.GameViewPanel;
@@ -12,5 +13,5 @@ public abstract class AbstractUpdate {
 		this.data = data;
 	}
 	
-	public abstract void applyChanges(GameViewPanel gameView);
+	public abstract void applyChanges(GameViewPanel gameView) throws IOException;
 }

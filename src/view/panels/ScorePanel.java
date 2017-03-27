@@ -3,6 +3,7 @@ package view.panels;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -35,7 +36,7 @@ public class ScorePanel extends JPanel{
 		setLayout(layout);
 		for(int i = 0; i < 5; i++)
 		{
-			ships[i]=new ShipPanel(0,i);
+			ships[i]=new ShipPanel(new Point(0,i));
 			add(ships[i]);
 		}
 		

@@ -5,9 +5,12 @@ import java.util.LinkedList;
 
 import model.game.board.Game;
 import model.game.directions.ComplexDirection;
+import model.game.exceptions.FirstTurnExpectedException;
 import model.game.exceptions.FriendlyFireException;
 import model.game.exceptions.IllegalFieldException;
+import model.game.exceptions.IllegalMoveDirection;
 import model.game.exceptions.NoShipToMoveException;
+import model.game.exceptions.NotYourShipException;
 import model.game.exceptions.OutOfBoardMoveException;
 
 public class ForwardMove extends AbstractMove{
@@ -21,7 +24,14 @@ public class ForwardMove extends AbstractMove{
 	}
 	
 	@Override
-	public LinkedList<Point> makeMove(Game game) throws IllegalFieldException, NoShipToMoveException, OutOfBoardMoveException, FriendlyFireException {
+	public LinkedList<Point> makeMove(Game game) throws 
+											IllegalFieldException, 
+											NoShipToMoveException, 
+											OutOfBoardMoveException, 
+											FriendlyFireException, 
+											FirstTurnExpectedException, 
+											IllegalMoveDirection, 
+											NotYourShipException {
 		Point attacked = game.move(field, target);
 		LinkedList<Point> list = new LinkedList<Point>();
 		list.add(field);

@@ -2,11 +2,14 @@ package view.windows;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import view.listeners_and_actions.NewGameListener;
 import view.panels.GameViewPanel;
 import view.params.Params;
 
@@ -21,7 +24,7 @@ public class MainWindow extends JFrame{
 	public Dimension size = Params.getMainWindowSize();
 	private final Color background = Params.boardBackground;
 	
-	public MainWindow(){
+	public MainWindow() throws IOException{
 		super("Tortuga");
 		this.setSize(size);
 		this.setMaximumSize(size);
@@ -34,6 +37,7 @@ public class MainWindow extends JFrame{
 		JMenu newGameMenu = new JMenu("New Game");
 		JMenuItem pvp1PCGame = new JMenuItem("Player vs Player (1PC)");
 		newGameMenu.add(pvp1PCGame);
+		pvp1PCGame.addActionListener(new NewGameListener());
 		menu.add(newGameMenu);
 		setJMenuBar(menu);
 		add(gameView);
@@ -41,5 +45,9 @@ public class MainWindow extends JFrame{
 		pack();
 		setLocationRelativeTo(null);		
 	}	
+	
+	public void reset() throws IOException{
+		gameView.resetPanels();
+	}
 	
 }
